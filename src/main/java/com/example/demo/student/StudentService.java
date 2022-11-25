@@ -26,7 +26,6 @@ public class StudentService {
             throw new BadRequestException(
                     "Email " + student.getEmail() + " taken");
         }
-
         studentRepository.save(student);
     }
 

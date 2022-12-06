@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { deleteStudent,getAllStudents } from "./client";
+import { Route, Routes, Link } from "react-router-dom";
 import {
     Layout,
     Menu,
-    Breadcrumb,
     Table,
     Spin,
     Button,
@@ -15,11 +15,9 @@ import {
     Popconfirm, Row, Col
 } from 'antd';
 import {
-    DesktopOutlined,
-    PieChartOutlined,
     TeamOutlined,
     LoadingOutlined,
-    PlusOutlined, GithubOutlined, LinkedinOutlined,
+    PlusOutlined, GithubOutlined, LinkedinOutlined, CopyOutlined, UserOutlined,
 } from '@ant-design/icons';
 import StudentDrawerForm from "./StudentDrawerForm";
 import StudentDrawerEditForm from "./StudentDrawerEditForm";
@@ -124,6 +122,7 @@ function App() {
         }
     ];
 
+
     const fetchStudents = () =>
         getAllStudents()
             .then(res => res.json())
@@ -187,26 +186,32 @@ function App() {
                onCollapse={setCollapsed}>
             <div className="logo" />
             <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-                <Menu.Item key="students" icon={<PieChartOutlined />}>
-                    Students
+                <Menu.Item key="home" icon={<TeamOutlined />}>
+                    <Link to=" ">
+                        <span className="nav-text">Students</span>
+                    </Link>
                 </Menu.Item>
-                <Menu.Item key="2" icon={<DesktopOutlined />}>
-                    Option 2
+                <Menu.Item key="subjects" icon={<CopyOutlined />}>
+                    <Link to="/subjects">
+                        <span className="nav-text">Subjects</span>
+                    </Link>
                 </Menu.Item>
-                <SubMenu key="sub2" icon={<TeamOutlined />} title="Team">
-                    <Menu.Item key="6">Team 1</Menu.Item>
-                    <Menu.Item key="8">Team 2</Menu.Item>
-                </SubMenu>
+                <Menu.Item key="teachers" icon={<UserOutlined />}>
+                    <Link to="/teachers">
+                        <span className="nav-text">Teachers</span>
+                    </Link>
+                </Menu.Item>
             </Menu>
         </Sider>
         <Layout className="site-layout">
             <Header className="site-layout-background" style={{ padding: 0 }} />
             <Content style={{ margin: '0 16px' }}>
-                <Breadcrumb style={{ margin: '16px 0' }}>
-                    <Breadcrumb.Item>Students:</Breadcrumb.Item>
-                </Breadcrumb>
                 <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-                    {renderStudents()}
+                    <Routes>
+                        <Route path="/" element={renderStudents()}/>
+                        <Route path="/subjects" element={<div>subjects</div>}/>
+                        <Route path="/teachers" element={<div>teachers</div>}/>
+                    </Routes>
                 </div>
             </Content>
             <Footer >

@@ -2,6 +2,7 @@ package com.example.demo.student;
 
 import com.example.demo.student.exception.BadRequestException;
 import com.example.demo.student.exception.StudentNotFoundException;
+import com.example.demo.subject.Subject;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,14 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
+    public Student getStudentById(Long studentId){
+        if(!studentRepository.existsById(studentId)) {
+            throw new StudentNotFoundException(
+                    "Student with id " + studentId + " does not exists");
+        }
+        return studentRepository.findById(studentId).get();
+    }
+
     public void addStudent(Student student) {
         Boolean existsEmail = studentRepository
                 .selectExistsEmail(student.getEmail());
@@ -34,7 +43,12 @@ public class StudentService {
             throw new StudentNotFoundException(
                     "Student with id " + studentId + " does not exists");
         }
-        studentRepository.deleteById(studentId);
+        Student student = getStudentById(studentId);
+        for(Subject s: student.getSubjects()){
+            s.deleteEnrolledStudent(student);
+        }
+
+        studentRepository.delete(student);
     }
 
     public void editStudent(Student student) {

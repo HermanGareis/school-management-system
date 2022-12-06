@@ -1,10 +1,16 @@
 package com.example.demo.student;
 
+import com.example.demo.subject.Subject;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @ToString
 @Getter
@@ -35,6 +41,10 @@ public class Student {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Gender gender;
+
+
+    @ManyToMany(mappedBy = "enrolledStudents")
+    private List<Subject> subjects;
 
     public Student(String name, String email, Gender gender) {
         this.name = name;

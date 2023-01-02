@@ -14,7 +14,7 @@ export const getAllStudents = () =>
     fetch("api/v1/students")
         .then(checkStatus);
 
-export const addNewStudent = student=>
+export const addNewStudent = student =>
     fetch("api/v1/students",{
             headers:{
                 'Content-Type': 'application/json'
@@ -38,3 +38,24 @@ export const editStudent = student =>
             body: JSON.stringify(student)
         }
     ).then(checkStatus)
+
+
+export const getAllSubjects = () =>
+    fetch("api/v1/subjects")
+        .then(checkStatus);
+
+
+export const deleteSubject = subjectId =>
+    fetch(`api/v1/subjects/${subjectId}`, {
+        method: 'DELETE'
+    }).then(checkStatus);
+
+
+export const getAllTeachers = () =>
+    fetch("api/v1/teachers")
+        .then(checkStatus);
+
+export const deleteTeacher = teacherId =>
+    fetch(`api/v1/teachers/${teacherId}`, {
+        method: 'DELETE'
+    }).then(checkStatus);

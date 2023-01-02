@@ -7,6 +7,7 @@ import com.example.demo.student.StudentRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -43,6 +44,7 @@ public class StudentIT {
     private final Faker faker = new Faker();
 
     @Test
+    @Transactional
     void canRegisterNewStudent() throws Exception{
         //given
         String name = String.format(

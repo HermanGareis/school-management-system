@@ -1,8 +1,8 @@
 import {Drawer, Input, Col, Select, Form, Row, Button, Spin} from 'antd';
 import {LoadingOutlined} from "@ant-design/icons";
 import {useState, useEffect} from 'react';
-import {editStudent} from "./client";
-import {errorNotification, successNotification} from "./Notification";
+import {editStudent} from "../client";
+import {errorNotification, successNotification} from "../Notification";
 
 const {Option} = Select;
 

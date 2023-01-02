@@ -47,7 +47,6 @@ public class StudentService {
         for(Subject s: student.getSubjects()){
             s.deleteEnrolledStudent(student);
         }
-
         studentRepository.delete(student);
     }
 

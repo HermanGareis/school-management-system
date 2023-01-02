@@ -1,4 +1,4 @@
-# students-management-system
+# School-management-system
 
 You can see the app running here (feel free to add or delete as many entries as you want) ---> http://springbootreactfullstack-env.eba-jpkw9vrh.sa-east-1.elasticbeanstalk.com/
 
